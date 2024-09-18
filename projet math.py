@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-D = 0.5
+D = 10**-2
 
 delta_x=1
 delta_y=1
@@ -52,7 +52,6 @@ def C(i,j,tableau_milieu_aquatique_n):
     newC+= ((D*delta_t)/(delta_x**2))*(get(i+1,j,tableau_milieu_aquatique_n)-2*get(i,j,tableau_milieu_aquatique_n)+get(i-1,j,tableau_milieu_aquatique_n))
     newC+= ((D*delta_t)/(delta_y**2))*(get(i,j+1,tableau_milieu_aquatique_n)-2*get(i,j,tableau_milieu_aquatique_n)+get(i,j-1,tableau_milieu_aquatique_n))
     newC-= delta_t*u*((get(i+1,j,tableau_milieu_aquatique_n)-get(i-1,j,tableau_milieu_aquatique_n))/(2*delta_x) + (get(i,j+1,tableau_milieu_aquatique_n)-get(i,j-1,tableau_milieu_aquatique_n))/(2*delta_y))
-    # newC = tableau_milieu_aquatique_n[i][j] + ((D * delta_t)/(delta_x**2)) *(tableau_milieu_aquatique_n[i+1][j]-2*tableau_milieu_aquatique_n[i][j]+tableau_milieu_aquatique_n[i-1][j]) + ((D * delta_t)/(delta_y**2)) *(tableau_milieu_aquatique_n[i][j+1]-2*tableau_milieu_aquatique_n[i][j]+tableau_milieu_aquatique_n[i][j+1]) - (delta_t * u)*((tableau_milieu_aquatique_n[i+1][j]-tableau_milieu_aquatique_n[i-1][j])/2* delta_x + (tableau_milieu_aquatique_n[i][j+1]-tableau_milieu_aquatique_n[i][j-1])/2* delta_y)
     return newC
 
 def actualiser(tableau_milieu_aquatique):
@@ -67,12 +66,10 @@ def actualiser(tableau_milieu_aquatique):
     afficher(nouveau_tableau)
     return nouveau_tableau
 
+tableau_milieu_aquatique[4][4] = 100
+tableau_milieu_aquatique[4][5] = 100
+tableau_milieu_aquatique[5][4] = 100
 tableau_milieu_aquatique[5][5] = 100
-# tableau_milieu_aquatique[5][4] = 4
-# tableau_milieu_aquatique[5][6] = 4
-# tableau_milieu_aquatique[4][5] = 4
-# tableau_milieu_aquatique[6][5] = 4
-
 
 
 
