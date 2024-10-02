@@ -30,8 +30,8 @@ tableau_milieu_aquatique_initial = [[] for y in range(taille_y)]
 
 
 for x in range(0,taille_x):
-    for y in range(0,taille_y):
-        tableau_milieu_aquatique_initial[x].append(0)
+    # for y in range(0,taille_y):
+    tableau_milieu_aquatique_initial.append(0)
 
 
 
@@ -43,8 +43,8 @@ def afficherGraphic(harvest):
     fig,ax=plt.subplots()
     im = ax.imshow(harvest)
 
-    ax.set_xticks(np.arange(0,taille_x))
-    ax.set_yticks(np.arange(0,taille_y))
+    # ax.set_xticks(np.arange(0,taille_x))
+    # ax.set_yticks(np.arange(0,taille_y))
 
     plt.setp(ax.get_xticklabels(),rotation=45,ha="right",rotation_mode="anchor")
 
@@ -73,20 +73,16 @@ def actualiser(tableau_milieu_aquatique):
     # Polution permanente
     # nouveau_tableau[4][4] = 1
 
-    for x in range(0,taille_x):
-        for y in range(0,taille_y):
-            nouveau_tableau[x].append(0)
+    # for x in range(0,taille_x):
+        # for y in range(0,taille_y):
+            # nouveau_tableau[x].append(0)
 
     for x in range(1,taille_x-1):
         for y in range(1,taille_y-1):
             nouveau_tableau[x][y] = C(x,y,tableau_milieu_aquatique)
     return nouveau_tableau
 
-tableau_milieu_aquatique[4][4] = 1
-tableau_milieu_aquatique[4][5] = 1
-tableau_milieu_aquatique[5][4] = 1
-tableau_milieu_aquatique[5][5] = 1
-
+tableau_milieu_aquatique[4] = 1
 
 
 

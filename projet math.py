@@ -51,8 +51,6 @@ def afficherGraphic(harvest):
     fig,ax=plt.subplots()
     im = ax.imshow(harvest)
 
-    ax.set_xticks(np.arange(0,taille_x))
-    ax.set_yticks(np.arange(0,taille_y))
 
     plt.setp(ax.get_xticklabels(),rotation=45,ha="right",rotation_mode="anchor")
 
