@@ -1,6 +1,4 @@
-
-import numpy as np
-import matplotlib.pyplot as plt
+from affichage import *
 
 D= 0.10
 
@@ -36,26 +34,11 @@ for x in range(0,taille_x):
 
 tableau_milieu_aquatique = tableau_milieu_aquatique_initial
 
-
-def afficherGraphic(tab):
-
-    fig,ax=plt.subplots()
-    im = ax.imshow(tab)
-
-    plt.setp(ax.get_xticklabels(),rotation=45,ha="right",rotation_mode="anchor")
-
-    ax.set_title("Propagation d'un poluant")
-    fig.tight_layout()
-    plt.show()
-
-def afficher (tableau_milieu_aquatique):
+def afficher(tableau_milieu_aquatique):
     print("\n")
     for x in range(0,taille_x):
         print(tableau_milieu_aquatique[x])
     print("\n")
-
-
-
 
 def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
     nouveau_tableau1 = np.dot(tableau_calcul_x,tableau_milieu_aquatique)
@@ -65,9 +48,7 @@ def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tablea
     
     # nouveau_tableau = np.add(nouveau_tableau,nouveau_tableau2)
     
-    
     nouveau_tableau = np.add(nouveau_tableau,tableau_constant)
-
 
     return nouveau_tableau
 
@@ -106,10 +87,6 @@ for x in range(0,taille_x):
         else :
             tableau_calcul_y[x].append(0)
 
-
-
-        
-
 tableau_milieu_aquatique[4][4] = 1
 
 tableau_milieu_aquatique=np.matrix(tableau_milieu_aquatique)
@@ -130,25 +107,16 @@ tableau_constant=np.matrix(tableau_constant)
 
 tableau_constant = tableau_constant.transpose()
 
-
 # MODIFIER TABLEAU CONSTANT POUR AVOIR DES MURS ET PAS DES FILTRES
 
-
-
-
-afficher(tableau_calcul_x)
-
-
-afficher(tableau_milieu_aquatique)
-
-
+afficherConsole(tableau_calcul_x,taille_x)
+afficherConsole(tableau_milieu_aquatique,taille_x)
 
 tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
 
+afficherConsole(tableau_milieu_aquatique,taille_x)
 
-afficher(tableau_milieu_aquatique)
-
-afficherGraphic(tableau_milieu_aquatique)
+afficherMatplotlib(tableau_milieu_aquatique,taille_x,taille_y)
 
 def calcul(tab):
     total = 0
