@@ -26,7 +26,7 @@ murHaut = True
 murBas =True
 
 
-n=1
+n=10
 
 if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
@@ -67,7 +67,7 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     # afficher (tableau_milieu_aquatique)
 
     def get(i,j,tableau_milieu_aquatique_n):
-        if(i+1>taille_x-1 or i-1< 0 or j+1 >taille_y-1 or j-1 <0):
+        if(i>=taille_x or i< 0 or j >=taille_y or j <0):
             return 0
         
         return tableau_milieu_aquatique_n[i][j]
@@ -78,16 +78,16 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
         droite,gauche,haut,bas = 1,1,1,1
         if(murBas):
-            if(i+1>=taille_y):
+            if(i==taille_y-1):
                 bas = 0
         if(murHaut):
-            if(i<0):
+            if(i==0):
                 haut = 0
         if(murDroite):
-            if(j+1>=taille_x):
+            if(j==taille_x-1):
                 droite = 0
         if(murGauche):
-            if(j<0):
+            if(j==0):
                 gauche = 0
         newC+= ((D*delta_t)/(delta_x**2))*(get(i+1,j,tableau_milieu_aquatique_n)-droite*get(i,j,tableau_milieu_aquatique_n)-gauche*get(i,j,tableau_milieu_aquatique_n)+get(i-1,j,tableau_milieu_aquatique_n))
         newC+= ((D*delta_t)/(delta_y**2))*(get(i,j+1,tableau_milieu_aquatique_n)-haut*get(i,j,tableau_milieu_aquatique_n)-bas*get(i,j,tableau_milieu_aquatique_n)+get(i,j-1,tableau_milieu_aquatique_n))
@@ -104,8 +104,8 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
             for y in range(0,taille_y):
                 nouveau_tableau[x].append(0)
 
-        for x in range(1,taille_x-1):
-            for y in range(1,taille_y-1):
+        for x in range(0,taille_x):
+            for y in range(0,taille_y):
                 nouveau_tableau[x][y] = C(x,y,tableau_milieu_aquatique)
         return nouveau_tableau
 
@@ -126,10 +126,10 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     # afficher (tableau_milieu_aquatique)
 
     tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique)
+    afficher(tableau_milieu_aquatique)
     afficherGraphic(tableau_milieu_aquatique)
 
 
-    afficher(tableau_milieu_aquatique)
     # tourner(100,tableau_milieu_aquatique)
     # afficherGraphic(tableau_milieu_aquatique)
 

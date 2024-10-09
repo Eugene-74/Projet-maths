@@ -16,6 +16,7 @@ taille_y=5
 
 u=0
 
+# Mur impossible pour l'instant
 # true : mur Newman
 # false : filtre Dirichlet
 murGauche = True
@@ -24,7 +25,7 @@ murHaut = True
 murBas =True
 
 
-n=2
+n=1
 
 if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
@@ -58,20 +59,13 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
 
 
-    def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y):
+    def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
         nouveau_tableau1 = np.dot(tableau_calcul_x,tableau_milieu_aquatique)
         nouveau_tableau2 = np.dot(tableau_milieu_aquatique ,tableau_calcul_y)
 
         nouveau_tableau = np.add(nouveau_tableau1,nouveau_tableau2)
         
-        # nouveau_tableau = np.add(nouveau_tableau,nouveau_tableau2)
         
-        tableau_constant1 = np.dot(tableau_milieu_aquatique ,tableau_constant_x)
-        tableau_constant2 = np.dot(tableau_constant_y ,tableau_milieu_aquatique)
-
-        tableau_constant = np.add(tableau_constant1,tableau_constant2)
-
-
         nouveau_tableau = np.add(nouveau_tableau,tableau_constant)
 
 
@@ -79,9 +73,9 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
 
 
-    def tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y):
+    def tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
         for i in range(n):
-            tableau_milieu_aquatique = actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y)
+            tableau_milieu_aquatique = actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
         return tableau_milieu_aquatique
 
 
@@ -113,39 +107,8 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
                 tableau_calcul_y[x].append(0)
 
 
-    tableau_constant_x = [[] for y in range(taille_x)]
-    for x in range(0,taille_x):
-        for y in range(0,taille_y):
-            if(x== taille_x-1 and y == taille_y-1):
-                if(y-x == -1):
-                    tableau_constant_x[x].append((D*delta_t/delta_x**2)*2)
-                elif(y-x == 0):
-                    tableau_constant_x[x].append((1/2-2*D*delta_t/delta_x**2)*2)
-                elif(y-x == 1):
-                    tableau_constant_x[x].append((D*delta_t/delta_x**2)*2)
-                else :
-                    tableau_constant_x[x].append(0)
-            else :
-                tableau_constant_x[x].append(0)
 
-    print("constant x : ")
-    afficher(tableau_constant_x)
-
-    tableau_constant_y = [[] for y in range(taille_x)]
-    for x in range(0,taille_x):
-        for y in range(0,taille_y):
-            if(x== taille_x-1 and y == taille_y-1):
-                if(y-x == -1):
-                    tableau_constant_y[x].append((D*delta_t/delta_y**2)*2)
-                elif(y-x == 0):
-                    tableau_constant_y[x].append((1/2-2*D*delta_t/delta_y**2)*2)
-                elif(y-x == 1):
-                    tableau_constant_y[x].append((D*delta_t/delta_y**2)*2)
-                else :
-                    tableau_constant_y[x].append(0)
-            else :
-                tableau_constant_y[x].append(0)
-
+            
 
     tableau_milieu_aquatique[4][4] = 1
 
@@ -156,17 +119,12 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     tableau_calcul_x=np.matrix(tableau_calcul_x)
     tableau_calcul_y=np.matrix(tableau_calcul_y)
 
-    tableau_constant_x=np.matrix(tableau_constant_x)
-    tableau_constant_y=np.matrix(tableau_constant_y)
 
+    tableau_constant = [[] for y in range(taille_x)]
 
-
-
-    # tableau_constant = [[] for y in range(taille_x)]
-
-    # for x in range(0,taille_x):
-    #     for y in range(0,taille_y):
-    #         tableau_constant[x].append(0)
+    for x in range(0,taille_x):
+        for y in range(0,taille_y):
+            tableau_constant[x].append(0)
     
     # for x in range(0,taille_x):
     #     for y in range(0,taille_y):
@@ -175,12 +133,12 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     #         if(y==0 or y==taille_y-1):
     #             tableau_constant[x][y]=1
 
-    # afficher(tableau_constant)
+    afficher(tableau_constant)
 
 
-    # tableau_constant=np.matrix(tableau_constant)
+    tableau_constant=np.matrix(tableau_constant)
 
-    # tableau_constant = tableau_constant.transpose()
+    tableau_constant = tableau_constant.transpose()
 
 
     # MODIFIER TABLEAU CONSTANT POUR AVOIR DES MURS ET PAS DES FILTRES
@@ -195,7 +153,7 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
 
 
-    tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y)
+    tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
 
 
     afficher(tableau_milieu_aquatique)
