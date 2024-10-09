@@ -30,7 +30,7 @@ if not ((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
 tableau_milieu_aquatique_initial = [[] for y in range(taille_x)]
 for x in range(0,taille_x):
-    for y in range(0,taille_x):
+    for y in range(0,taille_y):
         tableau_milieu_aquatique_initial[x].append(0)
 
 
@@ -76,8 +76,8 @@ for x in range(0,taille_x):
 
 tableau_calcul_y = [[] for y in range(taille_x)]
 
-for x in range(0,taille_x):
-    for y in range(0,taille_x):
+for x in range(0,taille_y):
+    for y in range(0,taille_y):
         if(y-x == -1):
             tableau_calcul_y[x].append((D*delta_t/delta_y**2))
         elif(y-x == 0):
@@ -171,7 +171,7 @@ tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,t
 
 afficherConsole(tableau_milieu_aquatique,taille_x)
 
-afficherMatplotlib(tableau_milieu_aquatique,taille_x,tableau_calcul_y)
+afficherMatplotlib(tableau_milieu_aquatique,taille_x,taille_y)
 
 def calcul(tab):
     total = 0

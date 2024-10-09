@@ -30,11 +30,6 @@ if not ((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     print("\033[91mpropagation trop elever en x ou en y\033[0m")
     exit()
 
-
-
-
-
-
 tableau_milieu_aquatique_initial = [[] for y in range(taille_y)]
 
 for x in range(0,taille_x):
@@ -69,22 +64,6 @@ def C(i,j,tableau_milieu_aquatique_n):
     newC+= ((D*delta_t)/(delta_y**2))*(get(i,j+1,tableau_milieu_aquatique_n)-haut*get(i,j,tableau_milieu_aquatique_n)-bas*get(i,j,tableau_milieu_aquatique_n)+get(i,j-1,tableau_milieu_aquatique_n))
     newC-= delta_t*u*((get(i+1,j,tableau_milieu_aquatique_n)-get(i-1,j,tableau_milieu_aquatique_n))/(2*delta_x) + (get(i,j+1,tableau_milieu_aquatique_n)-get(i,j-1,tableau_milieu_aquatique_n))/(2*delta_y))
     return newC
-
-def actualiser(tableau_milieu_aquatique):
-    nouveau_tableau = [[] for y in range(taille_y)]
-
-    # Polution permanente
-    # nouveau_tableau[4][4] = 1
-
-    for x in range(0,taille_x):
-        for y in range(0,taille_y):
-            tableau_milieu_aquatique_initial[x].append(0)
-
-tableau_milieu_aquatique = tableau_milieu_aquatique_initial
-
-    # afficher (tableau_milieu_aquatique)
-
-    
 
 def actualiser(tableau_milieu_aquatique):
     nouveau_tableau = [[] for y in range(taille_y)]
