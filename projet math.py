@@ -103,7 +103,7 @@ def actualiser(tableau_milieu_aquatique):
 
 tableau_milieu_aquatique[4][4] = 1
 
-afficher(tableau_milieu_aquatique)
+afficherConsole(tableau_milieu_aquatique,taille_x)
 # tableau_milieu_aquatique[4][5] = 1
 # tableau_milieu_aquatique[5][4] = 1
 # tableau_milieu_aquatique[5][5] = 1
@@ -118,16 +118,16 @@ def tourner(n,tableau_milieu_aquatique):
 # afficher (tableau_milieu_aquatique)
 
 tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique)
-afficherGraphic(tableau_milieu_aquatique)
+afficherMatplotlib(tableau_milieu_aquatique,taille_x,taille_y)
 
 
-afficher(tableau_milieu_aquatique)
+afficherConsole(tableau_milieu_aquatique,taille_x)
 # tourner(100,tableau_milieu_aquatique)
 # afficherGraphic(tableau_milieu_aquatique)
 
 def calcul(tab):
     total = 0
-    afficher(tab)
+    afficherConsole(tab,taille_x)
     for x in range(0,taille_x):
         for y in range(0,taille_y):
             total += tab[x][y]

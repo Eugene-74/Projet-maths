@@ -37,27 +37,6 @@ for x in range(0,taille_x):
 
 tableau_milieu_aquatique = tableau_milieu_aquatique_initial
 
-
-def afficherGraphic(tab):
-
-    fig,ax=plt.subplots()
-    im = ax.imshow(tab)
-
-    plt.setp(ax.get_xticklabels(),rotation=45,ha="right",rotation_mode="anchor")
-
-    ax.set_title("Propagation d'un poluant")
-    fig.tight_layout()
-    plt.show()
-
-def afficher (tableau_milieu_aquatique):
-    print("\n")
-    for x in range(0,taille_x):
-        print(tableau_milieu_aquatique[x])
-    print("\n")
-
-
-
-
 def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y):
     nouveau_tableau1 = np.dot(tableau_calcul_x,tableau_milieu_aquatique)
     nouveau_tableau2 = np.dot(tableau_milieu_aquatique ,tableau_calcul_y)
@@ -77,14 +56,10 @@ def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tablea
 
     return nouveau_tableau
 
-
-
 def tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y):
     for i in range(n):
         tableau_milieu_aquatique = actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y)
     return tableau_milieu_aquatique
-
-
 
 tableau_calcul_x = [[] for y in range(taille_x)]
 
@@ -130,7 +105,7 @@ for x in range(0,taille_x):
             tableau_constant_x[x].append(0)
 
 print("constant x : ")
-afficher(tableau_constant_x)
+afficherConsole(tableau_constant_x,taille_x)
 
 tableau_constant_y = [[] for y in range(taille_x)]
 for x in range(0,taille_x):
@@ -186,26 +161,21 @@ tableau_constant_y=np.matrix(tableau_constant_y)
 
 # MODIFIER TABLEAU CONSTANT POUR AVOIR DES MURS ET PAS DES FILTRES
 
-
-
-
-afficher(tableau_calcul_x)
-
-
-afficher(tableau_milieu_aquatique)
+afficherConsole(tableau_calcul_x,taille_x)
+afficherMatplotlib(tableau_milieu_aquatique,taille_x,taille_y)
 
 
 
 tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant_x,tableau_constant_y)
 
 
-afficher(tableau_milieu_aquatique)
+afficherConsole(tableau_milieu_aquatique,taille_x)
 
-afficherGraphic(tableau_milieu_aquatique)
+afficherMatplotlib(tableau_milieu_aquatique,taille_x,tableau_calcul_y)
 
 def calcul(tab):
     total = 0
-    afficher(tab)
+    afficherConsole(tab,taille_x)
     for x in range(0,taille_x):
         for y in range(0,taille_y):
             total += tab[x,y]
