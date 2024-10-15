@@ -1,5 +1,4 @@
 
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -20,8 +19,15 @@ u=0
 # Mur impossible pour l
 # true : mur Newman
 # false : filtre Dirichlet
+murGauche = True
+murDroite = True
 murHaut = True
 murBas =True
+
+Ghaut = 0
+Ggauche = 0
+Gbas = 0
+Gdroite = 0
 
 
 n=100
@@ -58,18 +64,23 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
 
 
-    def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_constant):
-        nouveau_tableau = np.dot(tableau_calcul_x,tableau_milieu_aquatique)
+    def actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
+        nouveau_tableau1 = np.dot(tableau_calcul_x,tableau_milieu_aquatique)
+        nouveau_tableau2 = np.dot(tableau_milieu_aquatique ,tableau_calcul_y)
 
+        nouveau_tableau = np.add(nouveau_tableau1,nouveau_tableau2)
+        
+        
         nouveau_tableau = np.add(nouveau_tableau,tableau_constant)
+
 
         return nouveau_tableau
 
 
 
-    def tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_constant):
+    def tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
         for i in range(n):
-            tableau_milieu_aquatique = actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_constant)
+            tableau_milieu_aquatique = actualiser(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
         return tableau_milieu_aquatique
 
 
@@ -85,41 +96,66 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
             elif(y-x == 0):
                 # tableau_calcul_x[x].append((1/2-2*D*delta_t/delta_x**2))
                 if(murBas and (x== taille_x -1 and y == taille_y-1)) :
-                    tableau_calcul_x[x].append((1-1*D*delta_t/delta_x**2))
+                    tableau_calcul_x[x].append((1/2-1*D*delta_t/delta_x**2))
                 elif(murHaut and (x== 0 and y == 0)) :
-                    tableau_calcul_x[x].append((1-1*D*delta_t/delta_x**2))
+                    tableau_calcul_x[x].append((1/2-1*D*delta_t/delta_x**2))
                 else :
-                    tableau_calcul_x[x].append((1-2*D*delta_t/delta_x**2))
+                    tableau_calcul_x[x].append((1/2-2*D*delta_t/delta_x**2))
             elif(y-x == 1):
                 tableau_calcul_x[x].append((D*delta_t/delta_x**2))
 
             else :
                 tableau_calcul_x[x].append(0)
 
+    tableau_calcul_y = [[] for y in range(taille_x)]
+
+    for x in range(0,taille_x):
+        for y in range(0,taille_y):
+            if(y-x == -1):
+                tableau_calcul_y[x].append((D*delta_t/delta_y**2))
+            elif(y-x == 0):
+                if(murDroite and (x== taille_x -1 and y == taille_y-1)) :
+                    tableau_calcul_y[x].append((1/2-1*D*delta_t/delta_y**2))
+                elif(murGauche and (x== 0 and y == 0)) :
+                    tableau_calcul_y[x].append((1/2-1*D*delta_t/delta_y**2))
+                else :
+                    tableau_calcul_y[x].append((1/2-2*D*delta_t/delta_y**2))
+            elif(y-x == 1):
+                tableau_calcul_y[x].append((D*delta_t/delta_y**2))
+            else :
+                tableau_calcul_y[x].append(0)
+
+
 
             
 
-    tableau_milieu_aquatique[2][2] = 1
+    tableau_milieu_aquatique[4][4] = 1
 
     tableau_milieu_aquatique=np.matrix(tableau_milieu_aquatique)
 
     tableau_milieu_aquatique = tableau_milieu_aquatique.transpose()
 
     tableau_calcul_x=np.matrix(tableau_calcul_x)
+    tableau_calcul_y=np.matrix(tableau_calcul_y)
 
 
     tableau_constant = [[] for y in range(taille_x)]
 
     for x in range(0,taille_x):
         for y in range(0,taille_y):
-            tableau_constant[x].append(0)
-    
-    # for x in range(0,taille_x):
-    #     for y in range(0,taille_y):
-    #         if(x==0 or x==taille_x-1):
-    #             tableau_constant[x][y]=1
-    #         if(y==0 or y==taille_y-1):
-    #             tableau_constant[x][y]=1
+            if(x == 0 ) :
+                tableau_constant[x].append(D*delta_t/delta_x**2*Ghaut)
+            elif(y==0):
+                tableau_constant[x].append(D*delta_t/delta_x**2*Ggauche)
+            elif(x == taille_x -1):
+                tableau_constant[x].append(D*delta_t/delta_x**2*Gbas)
+            elif(y==taille_y-1):
+                tableau_constant[x].append(D*delta_t/delta_x**2*Gdroite)
+            else :
+                tableau_constant[x].append(0)
+
+
+
 
     afficher(tableau_constant)
 
@@ -141,7 +177,7 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
 
 
-    tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_constant)
+    tableau_milieu_aquatique = tourner(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
 
 
     afficher(tableau_milieu_aquatique)
