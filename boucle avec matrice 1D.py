@@ -11,8 +11,7 @@ delta_y=1
 delta_t=1
 
 
-taille_x=5
-taille_y=5
+taille_x=10
 
 
 u=0
@@ -24,9 +23,9 @@ murHaut = True
 murBas =True
 
 
-n=100
+n=10
 
-if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
+if(2*D)*((delta_t/delta_x**2)<=1):
 
     tableau_milieu_aquatique_initial = [[] for y in range(taille_x)]
     for x in range(0,taille_x):
@@ -77,14 +76,14 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     tableau_calcul_x = [[] for y in range(taille_x)]
 
     for x in range(0,taille_x):
-        for y in range(0,taille_y):
+        for y in range(0,taille_x):
             if(y-x == -1):
                 tableau_calcul_x[x].append((D*delta_t/delta_x**2))
                 # tableau_calcul_x[x].append(0)
 
             elif(y-x == 0):
                 # tableau_calcul_x[x].append((1/2-2*D*delta_t/delta_x**2))
-                if(murBas and (x== taille_x -1 and y == taille_y-1)) :
+                if(murBas and (x== taille_x -1 and y == taille_x-1)) :
                     tableau_calcul_x[x].append((1-1*D*delta_t/delta_x**2))
                 elif(murHaut and (x== 0 and y == 0)) :
                     tableau_calcul_x[x].append((1-1*D*delta_t/delta_x**2))
@@ -111,7 +110,7 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     tableau_constant = [[] for y in range(taille_x)]
 
     for x in range(0,taille_x):
-        for y in range(0,taille_y):
+        for y in range(0,taille_x):
             tableau_constant[x].append(0)
     
     # for x in range(0,taille_x):
@@ -152,7 +151,7 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
         total = 0
         afficher(tab)
         for x in range(0,taille_x):
-            for y in range(0,taille_y):
+            for y in range(0,taille_x):
                 total += tab[x,y]
         print("total : "+str(total))
         

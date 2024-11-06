@@ -13,8 +13,8 @@ delta_y=1
 delta_t=1
 
 
-taille_x=5
-taille_y=5
+taille_x=10
+taille_y=10
 
 u=0
 
@@ -46,10 +46,10 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
     tableau_milieu_aquatique = tableau_milieu_aquatique_initial
 
 
-    def afficherGraphic(harvest):
+    def afficherGraphic(tab):
 
         fig,ax=plt.subplots()
-        im = ax.imshow(harvest)
+        im = ax.imshow(tab)
 
 
         plt.setp(ax.get_xticklabels(),rotation=45,ha="right",rotation_mode="anchor")

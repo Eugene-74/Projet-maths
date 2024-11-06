@@ -10,8 +10,8 @@ delta_y=1
 delta_t=1
 
 
-taille_x=5
-taille_y=5
+taille_x=10
+taille_y=10
 
 
 u=0
@@ -24,19 +24,20 @@ murDroite = True
 murHaut = True
 murBas =True
 
+# ajout de polution continuel sur un bord
 Ghaut = 0
 Ggauche = 0
 Gbas = 0
 Gdroite = 0
 
 
-n=100
+n=10
 
 if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
     tableau_milieu_aquatique_initial = [[] for y in range(taille_x)]
     for x in range(0,taille_x):
-        for y in range(0,taille_x):
+        for y in range(0,taille_y):
             tableau_milieu_aquatique_initial[x].append(0)
 
 
