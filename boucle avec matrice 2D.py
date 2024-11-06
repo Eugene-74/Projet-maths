@@ -25,8 +25,9 @@ murHaut = True
 murBas =True
 
 # ajout de polution continuel sur un bord
+# FAIT DES TRUCS BISARD
 Ghaut = 0
-Ggauche = 0
+Ggauche = 1
 Gbas = 0
 Gdroite = 0
 
@@ -144,16 +145,16 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
     for x in range(0,taille_x):
         for y in range(0,taille_y):
+            # Double au coin si les 2 mur sont polué
+            tableau_constant[x].append(0)
             if(x == 0 ) :
-                tableau_constant[x].append(D*delta_t/delta_x**2*Ghaut)
-            elif(y==0):
-                tableau_constant[x].append(D*delta_t/delta_x**2*Ggauche)
-            elif(x == taille_x -1):
-                tableau_constant[x].append(D*delta_t/delta_x**2*Gbas)
-            elif(y==taille_y-1):
-                tableau_constant[x].append(D*delta_t/delta_x**2*Gdroite)
-            else :
-                tableau_constant[x].append(0)
+                tableau_constant[x][y] += (D*delta_t/delta_x**2*Ggauche)
+            if(y==0):
+                tableau_constant[x][y] += (D*delta_t/delta_x**2*Ghaut)
+            if(x == taille_x -1):
+                tableau_constant[x][y] += (D*delta_t/delta_x**2*Gdroite)
+            if(y==taille_y-1):
+                tableau_constant[x][y] += (D*delta_t/delta_x**2*Gbas)
 
 
 
