@@ -13,8 +13,9 @@ delta_t=1
 
 taille_x=10
 
-
-u=0
+# Si u est grand le schema n'est pas adapté
+# Les murs ne marche pas non plus
+u=0.1
 
 # Mur impossible pour l
 # true : mur Newman
@@ -23,7 +24,7 @@ murHaut = True
 murBas =True
 
 
-n=10
+n=1
 
 if(2*D)*((delta_t/delta_x**2)<=1):
 
@@ -78,11 +79,8 @@ if(2*D)*((delta_t/delta_x**2)<=1):
     for x in range(0,taille_x):
         for y in range(0,taille_x):
             if(y-x == -1):
-                tableau_calcul_x[x].append((D*delta_t/delta_x**2))
-                # tableau_calcul_x[x].append(0)
-
+                tableau_calcul_x[x].append((D*delta_t/delta_x**2) + delta_t*u/(2*delta_x))
             elif(y-x == 0):
-                # tableau_calcul_x[x].append((1/2-2*D*delta_t/delta_x**2))
                 if(murBas and (x== taille_x -1 and y == taille_x-1)) :
                     tableau_calcul_x[x].append((1-1*D*delta_t/delta_x**2))
                 elif(murHaut and (x== 0 and y == 0)) :
@@ -90,7 +88,7 @@ if(2*D)*((delta_t/delta_x**2)<=1):
                 else :
                     tableau_calcul_x[x].append((1-2*D*delta_t/delta_x**2))
             elif(y-x == 1):
-                tableau_calcul_x[x].append((D*delta_t/delta_x**2))
+                tableau_calcul_x[x].append((D*delta_t/delta_x**2) - delta_t*u/(2*delta_x))
 
             else :
                 tableau_calcul_x[x].append(0)

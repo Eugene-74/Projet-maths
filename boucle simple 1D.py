@@ -16,14 +16,15 @@ delta_t=1
 taille_x=10
 # taille_y=5
 
+# courant vers le bas
 u=0
+# CASE LES MUR 
+
 
 # true : mur Newman
 # false : filtre Dirichlet
 murGauche = True
 murDroite = True
-# murHaut = True
-# murBas =True
 
 
 n=10
@@ -86,7 +87,6 @@ if((2*D)*(delta_t/delta_x**2)<=1):
             if(j==0):
                 gauche = 0
         newC+= ((D*delta_t)/(delta_x**2))*(get(i+1,j,tableau_milieu_aquatique_n)-droite*get(i,j,tableau_milieu_aquatique_n)-gauche*get(i,j,tableau_milieu_aquatique_n)+get(i-1,j,tableau_milieu_aquatique_n))
-        # newC+= ((D*delta_t)/(delta_y**2))*(get(i,j+1,tableau_milieu_aquatique_n)-haut*get(i,j,tableau_milieu_aquatique_n)-bas*get(i,j,tableau_milieu_aquatique_n)+get(i,j-1,tableau_milieu_aquatique_n))
         newC-= delta_t*u*((get(i+1,j,tableau_milieu_aquatique_n)-get(i-1,j,tableau_milieu_aquatique_n))/(2*delta_x))
         return newC
 

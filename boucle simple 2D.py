@@ -16,7 +16,9 @@ delta_t=1
 taille_x=10
 taille_y=10
 
-u=0
+u_x=0.1
+u_y=0.1
+
 
 # true : mur Newman
 # false : filtre Dirichlet
@@ -26,7 +28,7 @@ murHaut = True
 murBas =True
 
 
-n=10
+n=100
 
 if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
 
@@ -91,7 +93,7 @@ if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))<=1):
                 gauche = 0
         newC+= ((D*delta_t)/(delta_x**2))*(get(i+1,j,tableau_milieu_aquatique_n)-droite*get(i,j,tableau_milieu_aquatique_n)-gauche*get(i,j,tableau_milieu_aquatique_n)+get(i-1,j,tableau_milieu_aquatique_n))
         newC+= ((D*delta_t)/(delta_y**2))*(get(i,j+1,tableau_milieu_aquatique_n)-haut*get(i,j,tableau_milieu_aquatique_n)-bas*get(i,j,tableau_milieu_aquatique_n)+get(i,j-1,tableau_milieu_aquatique_n))
-        newC-= delta_t*u*((get(i+1,j,tableau_milieu_aquatique_n)-get(i-1,j,tableau_milieu_aquatique_n))/(2*delta_x) + (get(i,j+1,tableau_milieu_aquatique_n)-get(i,j-1,tableau_milieu_aquatique_n))/(2*delta_y))
+        newC-= delta_t*(u_x*(get(i+1,j,tableau_milieu_aquatique_n)-get(i-1,j,tableau_milieu_aquatique_n))/(2*delta_x) + u_y*(get(i,j+1,tableau_milieu_aquatique_n)-get(i,j-1,tableau_milieu_aquatique_n))/(2*delta_y))
         return newC
 
     def actualiser(tableau_milieu_aquatique):
