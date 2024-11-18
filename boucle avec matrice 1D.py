@@ -22,12 +22,12 @@ def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_const
 
 # Initialisation du tableau de calcul en x
 tableau_calcul_x = initialisation_tableau()
-for x in range(0,taille_x):
-    for y in range(0,taille_x):
+for x in range(0,taille):
+    for y in range(0,taille):
         if(y-x == -1):
             tableau_calcul_x[x][y] = (D*delta_t/delta_x**2) + delta_t*u_x/(2*delta_x)
         elif(y-x == 0):
-            if(murBas and (x== taille_x -1 and y == taille_x-1)) :
+            if(murBas and (x== taille -1 and y == taille-1)) :
                 tableau_calcul_x[x][y] = (1-1*D*delta_t/delta_x**2)
             elif(murHaut and (x== 0 and y == 0)) :
                 tableau_calcul_x[x][y] = (1-1*D*delta_t/delta_x**2)

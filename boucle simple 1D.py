@@ -7,17 +7,16 @@ verification_CFL_1D()
 
 
 def get(i,j,tableau_milieu_aquatique_n):
-    if(i>=taille_x or i< 0 or j >=taille_x or j <0):
+    if(i>=taille or i< 0 or j >=taille or j <0):
         return 0
     return tableau_milieu_aquatique_n[i][j]
 
 def C(i,j,tableau_milieu_aquatique_n):
     newC = 0
     newC= get(i,j,tableau_milieu_aquatique_n)
-
     droite,gauche = 1,1
     if(murDroite):
-        if(j==taille_x-1):
+        if(j==taille-1):
             droite = 0
     if(murGauche):
         if(j==0):
@@ -29,9 +28,9 @@ def C(i,j,tableau_milieu_aquatique_n):
 def effectuer_calcul(tableau_milieu_aquatique):
     nouveau_tableau = initialisation_tableau_constant()
 
-    for x in range(0,taille_x):
-        for y in range(0,taille_x):
-            nouveau_tableau[x][y] = C(x,y,tableau_milieu_aquatique)
+    for x in range(0,taille):
+        for y in range(0,taille):
+            nouveau_tableau[x][y] += C(x,y,tableau_milieu_aquatique)
     return nouveau_tableau
 
 afficher(tableau_milieu_aquatique)

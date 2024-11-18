@@ -8,7 +8,7 @@ from valeur import *
 verification_CFL_2D()
 
 def get(i,j,tableau_milieu_aquatique_n):
-    if(i>=taille_x or i< 0 or j >=taille_y or j <0):
+    if(i>=taille or i< 0 or j >=taille or j <0):
         return 0
     
     return tableau_milieu_aquatique_n[i][j]
@@ -19,13 +19,13 @@ def C(i,j,tableau_milieu_aquatique_n):
 
     droite,gauche,haut,bas = 1,1,1,1
     if(murBas):
-        if(i==taille_y-1):
+        if(i==taille-1):
             bas = 0
     if(murHaut):
         if(i==0):
             haut = 0
     if(murDroite):
-        if(j==taille_x-1):
+        if(j==taille-1):
             droite = 0
     if(murGauche):
         if(j==0):
@@ -38,9 +38,9 @@ def C(i,j,tableau_milieu_aquatique_n):
 def effectuer_calcul(tableau_milieu_aquatique):
     nouveau_tableau = initialisation_tableau_constant()
 
-    for x in range(0,taille_x):
-        for y in range(0,taille_y):
-            nouveau_tableau[x][y] = C(x,y,tableau_milieu_aquatique)
+    for x in range(0,taille):
+        for y in range(0,taille):
+            nouveau_tableau[x][y] += C(x,y,tableau_milieu_aquatique)
     return nouveau_tableau
 
 

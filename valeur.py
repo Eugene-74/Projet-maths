@@ -1,5 +1,5 @@
 # Coefficient de diffusion
-D= 1
+D = 0.2
 
 # pas de coordonnée
 delta_x=1
@@ -9,8 +9,7 @@ delta_y=1 #utile seuleuement en 2D
 delta_t=1
 
 # taille de la grille
-taille_x=11
-taille_y=11 #utile seuleuement en 2D
+taille=11
 
 # Si u est grand le schema n'est pas adapté
 u_x=0 # possitif vers la droite
@@ -34,17 +33,16 @@ afficherTableauCalcul = False
 afficherConstant = False
 afficherTableau = False
 afficherVisuel = True
-
-verifierLesConditionCFL = False
+verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=5
+n=1
 
 # fonctions :
 def initialisation_tableau():
-    tableau = [[] for y in range(taille_x)]
-    for x in range(0,taille_x):
-        for y in range(0,taille_x):
+    tableau = [[] for y in range(taille)]
+    for x in range(0,taille):
+        for y in range(0,taille):
             tableau[x].append(0)
     return tableau
 
@@ -58,19 +56,18 @@ tableau_milieu_aquatique[5][5] = 1
 
 def initialisation_tableau_constant():
     tableau_constant = initialisation_tableau()
-    # polution permanente
-    # tableau_constant[5][5] = 0
 
-    for x in range(0,taille_x):
-        for y in range(0,taille_y):
+    for x in range(0,taille):
+        for y in range(0,taille):
             # Double au coin si les 2 mur sont polué
             if(x == 0 ) :
+                # TODO pas finit ... pour y ???
                 tableau_constant[x][y] += (D*delta_t/delta_x**2*Ggauche)
             if(y==0):
                 tableau_constant[x][y] += (D*delta_t/delta_x**2*Ghaut)
-            if(x == taille_x -1):
+            if(x == taille -1):
                 tableau_constant[x][y] += (D*delta_t/delta_x**2*Gdroite)
-            if(y==taille_y-1):
+            if(y==taille-1):
                 tableau_constant[x][y] += (D*delta_t/delta_x**2*Gbas)
     return tableau_constant
 

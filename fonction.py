@@ -34,13 +34,12 @@ def afficherGraphic(tab):
     if(afficherVisuel):
         fig,ax=plt.subplots()
         im = ax.imshow(tab)
-
         plt.show()
 
 def afficher (tableau_milieu_aquatique):
     if(afficherTableau):
         print("\n")
-        for x in range(0,taille_x):
+        for x in range(0,taille):
             print(tableau_milieu_aquatique[x])
         print("\n")
 

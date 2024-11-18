@@ -22,12 +22,12 @@ def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcu
 
 # Initialisation du tableau de calcul en x
 tableau_calcul_x = initialisation_tableau()
-for x in range(0,taille_x):
-    for y in range(0,taille_y):
+for x in range(0,taille):
+    for y in range(0,taille):
         if(y-x == -1):
             tableau_calcul_x[x][y] = (D*delta_t/delta_x**2) + delta_t*u_x/(2*delta_x)
         elif(y-x == 0):
-            if(murBas and (x== taille_x -1 and y == taille_y-1)) :
+            if(murBas and (x== taille -1 and y == taille-1)) :
                 tableau_calcul_x[x][y] = (1/2-1*D*delta_t/delta_x**2)
             elif(murHaut and (x== 0 and y == 0)) :
                 tableau_calcul_x[x][y] = (1/2-1*D*delta_t/delta_x**2)
@@ -37,16 +37,16 @@ for x in range(0,taille_x):
             tableau_calcul_x[x][y] = (D*delta_t/delta_x**2)-delta_t*u_x/(2*delta_x)
 # enleve les echanges avec l'exterieur du au courant
 tableau_calcul_x[0][0] += -delta_t*u_x/(2*delta_x)
-tableau_calcul_x[taille_x-1][taille_y-1] += delta_t*u_x/(2*delta_x)
+tableau_calcul_x[taille-1][taille-1] += delta_t*u_x/(2*delta_x)
 
 # Initialisation du tableau de calcul en y
 tableau_calcul_y = initialisation_tableau()
-for x in range(0,taille_x):
-    for y in range(0,taille_y):
+for x in range(0,taille):
+    for y in range(0,taille):
         if(y-x == -1):
             tableau_calcul_y[x][y] = (D*delta_t/delta_y**2) - delta_t*u_y/(2*delta_y)
         elif(y-x == 0):
-            if(murDroite and (x== taille_x -1 and y == taille_y-1)) :
+            if(murDroite and (x== taille -1 and y == taille-1)) :
                 tableau_calcul_y[x][y] = (1/2-1*D*delta_t/delta_y**2)
             elif(murGauche and (x== 0 and y == 0)) :
                 tableau_calcul_y[x][y] = (1/2-1*D*delta_t/delta_y**2)
@@ -56,7 +56,7 @@ for x in range(0,taille_x):
             tableau_calcul_y[x][y] = (D*delta_t/delta_y**2) + delta_t*u_y/(2*delta_y)
 # enleve les echanges avec l'exterieur du au courant
 tableau_calcul_y[0][0] += -delta_t*u_y/(2*delta_y)
-tableau_calcul_y[taille_x-1][taille_y-1] += delta_t*u_y/(2*delta_y)
+tableau_calcul_y[taille-1][taille-1] += delta_t*u_y/(2*delta_y)
 
 # convertir les tableaux en matrices
 tableau_milieu_aquatique=np.matrix(tableau_milieu_aquatique)
