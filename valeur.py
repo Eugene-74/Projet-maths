@@ -22,7 +22,7 @@ murDroite = True
 murHaut = True #utile seuleuement en 2D
 murBas =True #utile seuleuement en 2D
 
-# Déffinit la polution dans sur un mur entier
+# Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
 Ghaut = 0
 Ggauche = 0
 Gbas = 0
