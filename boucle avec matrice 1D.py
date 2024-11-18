@@ -40,7 +40,7 @@ for x in range(0,taille):
 tableau_milieu_aquatique=np.matrix(tableau_milieu_aquatique)
 tableau_calcul_x=np.matrix(tableau_calcul_x)
 
-tableau_constant = initialisation_tableau_constant()
+tableau_constant = initialisation_tableau_constant_1D()
 
 afficher(tableau_constant)
 

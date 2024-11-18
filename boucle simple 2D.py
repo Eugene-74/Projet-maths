@@ -36,7 +36,7 @@ def C(i,j,tableau_milieu_aquatique_n):
     return newC
 
 def effectuer_calcul(tableau_milieu_aquatique):
-    nouveau_tableau = initialisation_tableau_constant()
+    nouveau_tableau = initialisation_tableau_constant_2D()
 
     for x in range(0,taille):
         for y in range(0,taille):

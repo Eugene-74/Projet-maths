@@ -63,7 +63,7 @@ tableau_milieu_aquatique=np.matrix(tableau_milieu_aquatique)
 tableau_calcul_x=np.matrix(tableau_calcul_x)
 tableau_calcul_y=np.matrix(tableau_calcul_y)
 
-tableau_constant = initialisation_tableau_constant()
+tableau_constant = initialisation_tableau_constant_2D()
 
 afficher(tableau_constant)
 

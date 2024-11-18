@@ -17,16 +17,16 @@ u_y=0 # possitif vers le bas #utile seuleuement en 2D
 
 # true : mur Newman
 # false : filtre Dirichlet
-murGauche = False
-murDroite = False
-murHaut = False #utile seuleuement en 2D
-murBas =False #utile seuleuement en 2D
+murGauche = True
+murDroite = True
+murHaut = True #utile seuleuement en 2D
+murBas =True #utile seuleuement en 2D
 
 # Déffinit la polution dans sur un mur entier
 Ghaut = 0
 Ggauche = 0
 Gbas = 0
-Gdroite = 0
+Gdroite = 1
 
 # afficher ou non les elements durant l'execution
 afficherTableauCalcul = False
@@ -36,7 +36,7 @@ afficherVisuel = True
 verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=1
+n=2
 
 # fonctions :
 def initialisation_tableau():
@@ -53,22 +53,28 @@ tableau_milieu_aquatique = initialisation_tableau()
 tableau_milieu_aquatique[5][5] = 1
 
 
+def initialisation_tableau_constant_1D():
+    tableau_constant = initialisation_tableau()
+    # tableau_constant[0][0] = (D)*((delta_t/delta_x**2)
 
-def initialisation_tableau_constant():
+
+    return tableau_constant
+
+def initialisation_tableau_constant_2D():
     tableau_constant = initialisation_tableau()
 
     for x in range(0,taille):
         for y in range(0,taille):
             # Double au coin si les 2 mur sont polué
             if(x == 0 ) :
-                # TODO pas finit ... pour y ???
-                tableau_constant[x][y] += (D*delta_t/delta_x**2*Ggauche)
+                # TODO pas finit ... pour y ??? pk cette formule
+                tableau_constant[x][y] +=(D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))*Ghaut
             if(y==0):
-                tableau_constant[x][y] += (D*delta_t/delta_x**2*Ghaut)
+                tableau_constant[x][y] += (D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))*Ggauche
             if(x == taille -1):
-                tableau_constant[x][y] += (D*delta_t/delta_x**2*Gdroite)
+                tableau_constant[x][y] += (D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))*Gbas
             if(y==taille-1):
-                tableau_constant[x][y] += (D*delta_t/delta_x**2*Gbas)
+                tableau_constant[x][y] += (D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))*Gdroite
     return tableau_constant
 
 
