@@ -23,8 +23,7 @@ murHaut = True #utile seuleuement en 2D
 murBas =True #utile seuleuement en 2D
 
 #Arondie les valeur en les affichant : permet de voir si elle sont proches ou non 
-arondire = False
-arondie = 5
+pourcentage = True
 
 # Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
 Ghaut = 0
