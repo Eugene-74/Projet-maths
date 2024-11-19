@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.colors as cols
 import matplotlib.pyplot as plt
 from valeur import *
+import os
 
 def afficherGraphicEtSauvegarder(tab):
         
@@ -35,7 +36,44 @@ def afficherGraphicEtSauvegarder(tab):
         plt.savefig(filename)
     if(afficherVisuel):
         plt.show()
+    plt.close()
+    
 
+def sauvegarder(tab,i,n):
+        
+    if(pourcentage) :
+        tab = tab / np.max(tab) * 100
+        tab = np.round(tab, 2)
+
+    
+    fig, ax = plt.subplots()
+    im = ax.imshow(tab, cmap='viridis', interpolation='nearest')
+    
+    if(pourcentage) :
+        cbar = plt.colorbar(im, ax=ax, format='%.2f%%')
+        im.set_clim(0, 100)
+    else :
+        cbar = plt.colorbar(im, ax=ax, format='%.2f')
+
+    if(pourcentage) :
+        cbar.ax.set_ylabel('Concentration par rapport au maximum', rotation=-90, va="bottom")
+    else :
+        cbar.ax.set_ylabel('Concentration', rotation=-90, va="bottom")
+
+    fig.tight_layout()
+
+    if(sauvegarderImage):
+        if(pourcentage):
+            os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/", exist_ok=True)
+            filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/{i}.png"
+        else:
+            os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/", exist_ok=True)
+            filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/{i}.png"
+
+        plt.savefig(filename)
+    if(afficherVisuel):
+        plt.show()
+    plt.close()
 
 
 

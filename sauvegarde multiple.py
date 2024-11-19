@@ -1,9 +1,7 @@
-
 import numpy as np
 from fonction import *
 from valeur import *
 
-verification_CFL_2D()
 
 def effectuer_calcul(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
     nouveau_tableau1 = np.dot(tableau_calcul_x,tableau_milieu_aquatique)
@@ -15,10 +13,11 @@ def effectuer_calcul(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,
     return nouveau_tableau
 def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
     for i in range(n):
+        sauvegarder(tableau_milieu_aquatique,i,n)
         tableau_milieu_aquatique = effectuer_calcul(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
     return tableau_milieu_aquatique
 
-# Initialisation du tableau de calcul en x
+
 tableau_calcul_x = initialisation_tableau()
 for x in range(0,taille):
     for y in range(0,taille):
@@ -65,22 +64,11 @@ tableau_calcul_y=np.matrix(tableau_calcul_y)
 
 tableau_constant = initialisation_tableau_constant_2D()
 
-afficher(tableau_constant)
-
-
 tableau_constant=np.matrix(tableau_constant)
 
 tableau_constant = tableau_constant.transpose()
 
-afficher(tableau_calcul_x)
-afficher(tableau_calcul_y)
-
-afficher(tableau_milieu_aquatique)
-
 tableau_milieu_aquatique = lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
 
-afficher(tableau_milieu_aquatique)
-
-afficherGraphicEtSauvegarder(tableau_milieu_aquatique)
 
 calcul_total(tableau_milieu_aquatique)

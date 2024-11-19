@@ -35,13 +35,13 @@ Gdroite = 0
 afficherTableauCalcul = False
 afficherConstant = False
 afficherTableau = False
-afficherVisuel = True
+afficherVisuel = False
 sauvegarderImage = True
 
 verifierLesConditionCFL = False
 
 # nombre de tour de boucle
-n=10
+n=100
 
 
 # fonctions :
