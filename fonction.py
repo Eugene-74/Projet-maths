@@ -3,6 +3,7 @@ import matplotlib.colors as cols
 import matplotlib.pyplot as plt
 from valeur import *
 import os
+import cv2
 
 def afficherGraphicEtSauvegarder(tab):
         
@@ -18,7 +19,7 @@ def afficherGraphicEtSauvegarder(tab):
         cbar = plt.colorbar(im, ax=ax, format='%.2f%%')
         im.set_clim(0, 100)
     else :
-        cbar = plt.colorbar(im, ax=ax, format='%.2f')
+        cbar = plt.colorbar(im, ax=ax, format='%.2e')
 
     if(pourcentage) :
         cbar.ax.set_ylabel('Concentration par rapport au maximum', rotation=-90, va="bottom")
@@ -53,7 +54,7 @@ def sauvegarder(tab,i,n):
         cbar = plt.colorbar(im, ax=ax, format='%.2f%%')
         im.set_clim(0, 100)
     else :
-        cbar = plt.colorbar(im, ax=ax, format='%.2f')
+        cbar = plt.colorbar(im, ax=ax, format='%.2e')
 
     if(pourcentage) :
         cbar.ax.set_ylabel('Concentration par rapport au maximum', rotation=-90, va="bottom")
@@ -77,7 +78,27 @@ def sauvegarder(tab,i,n):
 
 
 
+def creer_video(n):
+    if sauvegarderImage:
+        if pourcentage:
+            chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/"
+        else:
+            chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/"
+        
+        images = [f"{chemin}{i}.png" for i in range(n)]
+        frame = cv2.imread(images[0])
+        height, width = frame.shape[:2]
 
+        video_name = f"{chemin}video.mp4"
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), 10, (width, height))
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), 100, (width, height))
+
+        for image in images:
+            video.write(cv2.imread(image))
+
+        cv2.destroyAllWindows()
+        video.release()
         
 
 def afficher (tableau_milieu_aquatique):

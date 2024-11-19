@@ -1,5 +1,5 @@
 # Coefficient de diffusion
-D = 0.25
+D = 0.2
 
 # pas de coordonnée
 delta_x=1
@@ -9,7 +9,9 @@ delta_y=1 #utile seuleuement en 2D
 delta_t=1
 
 # taille de la grille
-taille=31
+# taille=31
+taille=101
+
 
 # Si u est grand le schema n'est pas adapté
 u_x=0 # possitif vers la droite
@@ -17,13 +19,13 @@ u_y=0 # possitif vers le bas #utile seuleuement en 2D
 
 # true : mur Newman
 # false : filtre Dirichlet
-murGauche = False
-murDroite = False
-murHaut = False #utile seuleuement en 2D
-murBas =False #utile seuleuement en 2D
+murGauche = True
+murDroite = True
+murHaut = True #utile seuleuement en 2D
+murBas =True #utile seuleuement en 2D
 
 # Permet d'afficher en % fonction du maximum du tableau
-pourcentage = False
+pourcentage = True
 
 # Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
 Ghaut = 0
@@ -38,10 +40,10 @@ afficherTableau = False
 afficherVisuel = False
 sauvegarderImage = True
 
-verifierLesConditionCFL = False
+verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=100
+n=1000
 
 
 # fonctions :
@@ -56,7 +58,7 @@ def initialisation_tableau():
 
 tableau_milieu_aquatique = initialisation_tableau()
 # polution initiale
-tableau_milieu_aquatique[15][15] = 1
+tableau_milieu_aquatique[15][15] = 100
 
 
 def initialisation_tableau_constant_1D():

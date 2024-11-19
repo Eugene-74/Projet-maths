@@ -18,6 +18,7 @@ def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcu
     return tableau_milieu_aquatique
 
 
+
 tableau_calcul_x = initialisation_tableau()
 for x in range(0,taille):
     for y in range(0,taille):
@@ -72,3 +73,5 @@ tableau_milieu_aquatique = lancer_les_calculs(n,tableau_milieu_aquatique,tableau
 
 
 calcul_total(tableau_milieu_aquatique)
+
+creer_video(n)
