@@ -22,11 +22,15 @@ murDroite = True
 murHaut = True #utile seuleuement en 2D
 murBas =True #utile seuleuement en 2D
 
+#Arondie les valeur en les affichant : permet de voir si elle sont proches ou non 
+arondire = False
+arondie = 5
+
 # Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
 Ghaut = 0
 Ggauche = 0
 Gbas = 0
-Gdroite = 1
+Gdroite = 0
 
 # afficher ou non les elements durant l'execution
 afficherTableauCalcul = False
@@ -36,7 +40,7 @@ afficherVisuel = True
 verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=2
+n=1000
 
 # fonctions :
 def initialisation_tableau():
@@ -50,7 +54,7 @@ def initialisation_tableau():
 
 tableau_milieu_aquatique = initialisation_tableau()
 # polution initiale
-tableau_milieu_aquatique[5][5] = 1
+tableau_milieu_aquatique[0][0] = 1
 
 
 def initialisation_tableau_constant_1D():

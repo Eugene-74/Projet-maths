@@ -32,9 +32,25 @@ def afficherMatplotlib(tab:list or np.matrix,len_x:int,len_y:int):
 
 def afficherGraphic(tab):
     if(afficherVisuel):
-        fig,ax=plt.subplots()
-        im = ax.imshow(tab)
+        
+        # Normalize the data by the maximum value
+        tab = tab / np.max(tab) * 100
+        if(arondire) :
+            tab = np.round(tab, arondie)
+
+        
+        fig, ax = plt.subplots()
+        im = ax.imshow(tab, cmap='viridis', interpolation='nearest')
+
+        # Create a colorbar with a specific format
+        cbar = plt.colorbar(im, ax=ax, format='%.2f')
+        cbar.ax.set_ylabel('Concentration (%)', rotation=-90, va="bottom")
+
+        fig.tight_layout()
         plt.show()
+
+
+        
 
 def afficher (tableau_milieu_aquatique):
     if(afficherTableau):
@@ -81,11 +97,11 @@ def verification_CFL_2D():
 
 
 def calcul_total(tab):
-    total = 0
+    if isinstance(tab, np.ndarray):
+        total = np.sum(tab)
+    else:
+        total = sum(sum(row) for row in tab)
     afficher(tab)
-    for x in range(0,len(tab)-1):
-        for y in range(0,len(tab[0])-1):
-            total += tab[x][y]
-    print("total : "+str(total))
+    print("total : " + str(total))
 
 

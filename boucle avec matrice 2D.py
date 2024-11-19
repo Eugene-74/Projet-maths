@@ -60,6 +60,8 @@ tableau_calcul_y[taille-1][taille-1] += delta_t*u_y/(2*delta_y)
 
 # convertir les tableaux en matrices
 tableau_milieu_aquatique=np.matrix(tableau_milieu_aquatique)
+tableau_milieu_aquatique = tableau_milieu_aquatique.transpose()
+
 tableau_calcul_x=np.matrix(tableau_calcul_x)
 tableau_calcul_y=np.matrix(tableau_calcul_y)
 
@@ -83,4 +85,5 @@ afficher(tableau_milieu_aquatique)
 
 afficherGraphic(tableau_milieu_aquatique)
 
+print("Taille du tableau:", tableau_milieu_aquatique.shape)
 calcul_total(tableau_milieu_aquatique)
