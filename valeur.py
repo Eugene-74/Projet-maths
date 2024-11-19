@@ -22,7 +22,7 @@ murDroite = True
 murHaut = True #utile seuleuement en 2D
 murBas =True #utile seuleuement en 2D
 
-#Arondie les valeur en les affichant : permet de voir si elle sont proches ou non 
+# Permet d'afficher en % fonction du maximum du tableau
 pourcentage = True
 
 # Déffinit la polution dans sur un mur entier / utile seuleuement en 2D

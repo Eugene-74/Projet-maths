@@ -6,7 +6,6 @@ from valeur import *
 def afficherGraphic(tab):
     if(afficherVisuel):
         
-        # Normalize the data by the maximum value
         if(pourcentage) :
             tab = tab / np.max(tab) * 100
             tab = np.round(tab, 2)
