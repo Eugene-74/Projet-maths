@@ -83,7 +83,7 @@ tableau_milieu_aquatique = lancer_les_calculs(n,tableau_milieu_aquatique,tableau
 
 afficher(tableau_milieu_aquatique)
 
-afficherGraphic(tableau_milieu_aquatique)
+afficherGraphicEtSauvegarder(tableau_milieu_aquatique)
 
 print("Taille du tableau:", tableau_milieu_aquatique.shape)
 calcul_total(tableau_milieu_aquatique)

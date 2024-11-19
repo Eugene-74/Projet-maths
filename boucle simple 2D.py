@@ -53,7 +53,7 @@ def lancer_les_calculs(n,tableau_milieu_aquatique):
 
 tableau_milieu_aquatique = lancer_les_calculs(n,tableau_milieu_aquatique)
 afficher(tableau_milieu_aquatique)
-afficherGraphic(tableau_milieu_aquatique)
+afficherGraphicEtSauvegarder(tableau_milieu_aquatique)
 
 
 calcul_total(tableau_milieu_aquatique)
