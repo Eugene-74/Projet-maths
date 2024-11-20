@@ -14,7 +14,9 @@ def afficherGraphicEtSauvegarder(tab):
     
     fig, ax = plt.subplots()
     im = ax.imshow(tab, cmap='viridis', interpolation='nearest')
-    
+    ax.set_xlabel('axe y')
+    ax.set_ylabel('axe x')
+
     if(pourcentage) :
         cbar = plt.colorbar(im, ax=ax, format='%.2f%%')
         im.set_clim(0, 100)
@@ -49,7 +51,8 @@ def sauvegarder(tab,i,n):
     
     fig, ax = plt.subplots()
     im = ax.imshow(tab, cmap='viridis', interpolation='nearest')
-    
+    ax.set_xlabel('axe y')
+    ax.set_ylabel('axe x')
     if(pourcentage) :
         cbar = plt.colorbar(im, ax=ax, format='%.2f%%')
         im.set_clim(0, 100)
@@ -65,34 +68,28 @@ def sauvegarder(tab,i,n):
 
     if(sauvegarderImage):
         if(pourcentage):
-            os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/", exist_ok=True)
             filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/{i}.png"
         else:
-            os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/", exist_ok=True)
             filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/{i}.png"
 
         plt.savefig(filename)
-    if(afficherVisuel):
-        plt.show()
     plt.close()
 
 
 
-def creer_video(n):
+def creer_video(n,num):
     if sauvegarderImage:
         if pourcentage:
             chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/"
         else:
             chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/"
         
-        images = [f"{chemin}{i}.png" for i in range(n)]
+        images = [f"{chemin}{i}.png" for i in range(num)]
         frame = cv2.imread(images[0])
         height, width = frame.shape[:2]
 
         video_name = f"{chemin}video.mp4"
-        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), 10, (width, height))
-        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
-        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), 100, (width, height))
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), num/10, (width, height))
 
         for image in images:
             video.write(cv2.imread(image))
@@ -142,8 +139,11 @@ def verification_CFL_2D():
         if(abs(u_y) == (2*D)*(delta_t/delta_y)):
             print("\033[92mcourant limite en y\033[0m")
 
-
-
+def verification_CFL_2D_ubis():
+    if(verifierLesConditionCFL):
+        if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2)+delta_t*u_x/(2*delta_x)+delta_t*u_y/(2*delta_y))>1):
+            print("\033[91mCondition CFL non respecter\033[0m")
+            exit()
 
 def calcul_total(tab):
     if isinstance(tab, np.ndarray):
