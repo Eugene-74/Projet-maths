@@ -1,6 +1,6 @@
 # Coefficient de diffusion
-# D = 10**-1
-D = 10**-2
+# D = 10**-2
+D = 0.2
 
 
 
@@ -12,26 +12,26 @@ delta_y=1 #utile seuleuement en 2D
 delta_t=1
 
 # taille de la grille
-# taille=31
-taille=101
+taille=1001
+# taille=101
 
 
 # Si u est grand le schema n'est pas adapté sauf avec l'utilisation de ubis
-# u_x=0 # possitif vers la droite
-# u_y=0 # possitif vers le bas #utile seuleuement en 2D
+u_x=0 # possitif vers la droite
+u_y=0 # possitif vers le bas #utile seuleuement en 2D
 
-u_x=0.1
-u_y=0.2
+# u_x=0.1
+# u_y=0.2
 
 # true : mur Newman
 # false : filtre Dirichlet
 murGauche = False #utile seuleuement en 2D
-murDroite = True #utile seuleuement en 2D
+murDroite = False #utile seuleuement en 2D
 murHaut = False
 murBas =False
 
 # Permet d'afficher en % fonction du maximum du tableau
-pourcentage = False
+pourcentage = True
 
 # Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
 Ghaut = 0
@@ -47,13 +47,13 @@ afficherVisuel = True
 sauvegarderImage = True
 
 # demander la verification des conditions CFL ou non
-verifierLesConditionCFL = True
+verifierLesConditionCFL = False
 
 # nombre de tour de boucle
-n=1000
+n=100000000
 
 # Parametre pour cree une video
-ubis = True # choix entre une approximation de u d'ordre 1 (True) ou 2 (False)
+ubis = False # choix entre une approximation de u d'ordre 1 (True) ou 2 (False)
 
 ecart = n/100 # ecart entre la sauvegarde d'une image
 # Pour une jolie video avec peu de temps de création il est conseiller de mettre un ecart de n/100
@@ -73,12 +73,12 @@ def initialisation_tableau():
 tableau_milieu_aquatique = initialisation_tableau()
 
 # polution initiale
-tableau_milieu_aquatique[10][5] = 7000000
-tableau_milieu_aquatique[11][5] = 7000000
-tableau_milieu_aquatique[10][6] = 7000000
-tableau_milieu_aquatique[11][6] = 7000000
+# tableau_milieu_aquatique[10][5] = 7000000
+# tableau_milieu_aquatique[11][5] = 7000000
+# tableau_milieu_aquatique[10][6] = 7000000
+# tableau_milieu_aquatique[11][6] = 7000000
 
-
+tableau_milieu_aquatique[500][500] = 1
 
 
 
