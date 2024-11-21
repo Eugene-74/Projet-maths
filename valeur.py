@@ -1,5 +1,8 @@
 # Coefficient de diffusion
-D = 10**-4
+D = 10**-1
+
+# D = 10**-2
+
 
 # pas de coordonnée
 delta_x=1
@@ -9,13 +12,16 @@ delta_y=1 #utile seuleuement en 2D
 delta_t=1
 
 # taille de la grille
-taille=31
-# taille=101
+# taille=31
+taille=101
 
 
 # Si u est grand le schema n'est pas adapté
-u_x=0.2 # possitif vers la droite
-u_y=0.2 # possitif vers le bas #utile seuleuement en 2D
+u_x=0 # possitif vers la droite
+u_y=0 # possitif vers le bas #utile seuleuement en 2D
+
+# u_x=0.1
+# u_y=0.2
 
 # true : mur Newman
 # false : filtre Dirichlet
@@ -43,7 +49,7 @@ sauvegarderImage = True
 verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=10
+n=1000
 
 # Pour cree une video 
 ubis = True
@@ -62,7 +68,11 @@ def initialisation_tableau():
 
 tableau_milieu_aquatique = initialisation_tableau()
 # polution initiale
-tableau_milieu_aquatique[10][5] = 30000000
+tableau_milieu_aquatique[10][5] = 7000000
+tableau_milieu_aquatique[11][5] = 7000000
+tableau_milieu_aquatique[10][6] = 7000000
+tableau_milieu_aquatique[11][6] = 7000000
+
 
 
 def initialisation_tableau_constant_1D():

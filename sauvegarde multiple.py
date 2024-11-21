@@ -13,7 +13,7 @@ def effectuer_calcul(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,
 def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
     j=0
     num = 0
-    ecart = 1
+    ecart = 10
     for i in range(n):
         if(j==0):
             sauvegarder(tableau_milieu_aquatique,num,n)
@@ -27,9 +27,9 @@ def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcu
 
 
 if(pourcentage):
-    os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/", exist_ok=True)
+    os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
 else:
-    os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/", exist_ok=True)
+    os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
 
 
 def initialisation_tableau_calcul_x():
@@ -82,7 +82,7 @@ def initialisation_tableau_calcul_x_ubis():
     for x in range(0,taille):
         for y in range(0,taille):
             if(y-x == -1):
-                if(u_x <0):
+                if(u_x <=0):
                     tableau_calcul_x[x][y] = (D*delta_t/delta_x**2)
                 elif (u_x >0) :
                     tableau_calcul_x[x][y] = (D*delta_t/delta_x**2) + delta_t*u_x/(2*delta_x)
@@ -104,7 +104,7 @@ def initialisation_tableau_calcul_x_ubis():
             elif(y-x == 1):
                 if(u_x <0):
                     tableau_calcul_x[x][y] = (D*delta_t/delta_x**2) - delta_t*u_x/(2*delta_x)
-                elif (u_x >0) :
+                elif (u_x >=0) :
                     tableau_calcul_x[x][y] = (D*delta_t/delta_x**2)
     # enleve les echanges avec l'exterieur du au courant
     tableau_calcul_x[0][0] += -delta_t*u_x/(2*delta_x)
@@ -121,7 +121,7 @@ def initialisation_tableau_calcul_y_ubis():
             if(y-x == -1):
                 if(u_y <0):
                     tableau_calcul_y[x][y] = (D*delta_t/delta_y**2) - delta_t*u_y/(2*delta_y)
-                elif (u_y >0) :
+                elif (u_y >=0) :
                     tableau_calcul_y[x][y] = (D*delta_t/delta_y**2)
 
             elif(y-x == 0):
@@ -138,7 +138,7 @@ def initialisation_tableau_calcul_y_ubis():
                     tableau_calcul_y[x][y] -= delta_t*u_y/(2*delta_y)
             
             elif(y-x == 1):
-                if(u_y <0):
+                if(u_y <=0):
                     tableau_calcul_y[x][y] = (D*delta_t/delta_y**2)
                 elif (u_y >0) :
                     tableau_calcul_y[x][y] = (D*delta_t/delta_y**2) + delta_t*u_y/(2*delta_y)

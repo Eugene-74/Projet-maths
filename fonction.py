@@ -32,9 +32,9 @@ def afficherGraphicEtSauvegarder(tab):
 
     if(sauvegarderImage):
         if(pourcentage):
-            filename = f"images/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}.png"
+            filename = f"images/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
         else:
-            filename = f"images/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}.png"
+            filename = f"images/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
 
         plt.savefig(filename)
     if(afficherVisuel):
@@ -68,9 +68,9 @@ def sauvegarder(tab,i,n):
 
     if(sauvegarderImage):
         if(pourcentage):
-            filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/{i}.png"
+            filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
         else:
-            filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/{i}.png"
+            filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
 
         plt.savefig(filename)
     plt.close()
@@ -80,9 +80,9 @@ def sauvegarder(tab,i,n):
 def creer_video(n,num):
     if sauvegarderImage:
         if pourcentage:
-            chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/"
+            chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
         else:
-            chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} n={n}/"
+            chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
         
         images = [f"{chemin}{i}.png" for i in range(num)]
         frame = cv2.imread(images[0])

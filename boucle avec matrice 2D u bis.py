@@ -23,7 +23,7 @@ tableau_calcul_x = initialisation_tableau()
 for x in range(0,taille):
     for y in range(0,taille):
         if(y-x == -1):
-            if(u_x <0):
+            if(u_x <=0):
                 tableau_calcul_x[x][y] = (D*delta_t/delta_x**2)
             elif (u_x >0) :
                 tableau_calcul_x[x][y] = (D*delta_t/delta_x**2) + delta_t*u_x/(2*delta_x)
@@ -45,7 +45,7 @@ for x in range(0,taille):
         elif(y-x == 1):
             if(u_x <0):
                 tableau_calcul_x[x][y] = (D*delta_t/delta_x**2) - delta_t*u_x/(2*delta_x)
-            elif (u_x >0) :
+            elif (u_x >=0) :
                 tableau_calcul_x[x][y] = (D*delta_t/delta_x**2)
 
 # enleve les echanges avec l'exterieur du au courant
@@ -59,7 +59,7 @@ for x in range(0,taille):
         if(y-x == -1):
             if(u_y <0):
                 tableau_calcul_y[x][y] = (D*delta_t/delta_y**2) - delta_t*u_y/(2*delta_y)
-            elif (u_y >0) :
+            elif (u_y >=0) :
                 tableau_calcul_y[x][y] = (D*delta_t/delta_y**2)
 
         elif(y-x == 0):
@@ -76,7 +76,7 @@ for x in range(0,taille):
                 tableau_calcul_y[x][y] -= delta_t*u_y/(2*delta_y)
         
         elif(y-x == 1):
-            if(u_y <0):
+            if(u_y <=0):
                 tableau_calcul_y[x][y] = (D*delta_t/delta_y**2)
             elif (u_y >0) :
                 tableau_calcul_y[x][y] = (D*delta_t/delta_y**2) + delta_t*u_y/(2*delta_y)
