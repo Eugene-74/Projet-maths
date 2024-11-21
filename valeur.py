@@ -26,7 +26,7 @@ u_y=0.2
 # true : mur Newman
 # false : filtre Dirichlet
 murGauche = False #utile seuleuement en 2D
-murDroite = False #utile seuleuement en 2D
+murDroite = True #utile seuleuement en 2D
 murHaut = False
 murBas =False
 
@@ -50,11 +50,13 @@ sauvegarderImage = True
 verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=10000
+n=1000
 
 # Parametre pour cree une video
 ubis = True # choix entre une approximation de u d'ordre 1 (True) ou 2 (False)
-ecart = 10 # ecart entre la sauvegarde d'une image
+
+ecart = n/100 # ecart entre la sauvegarde d'une image
+# Pour une jolie video avec peu de temps de création il est conseiller de mettre un ecart de n/100
 
 
 
@@ -75,6 +77,9 @@ tableau_milieu_aquatique[10][5] = 7000000
 tableau_milieu_aquatique[11][5] = 7000000
 tableau_milieu_aquatique[10][6] = 7000000
 tableau_milieu_aquatique[11][6] = 7000000
+
+
+
 
 
 

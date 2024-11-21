@@ -31,9 +31,9 @@ def afficherGraphicEtSauvegarder(tab):
 
     if(sauvegarderImage):
         if(pourcentage):
-            filename = f"images/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
+            filename = f"images/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
         else:
-            filename = f"images/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
+            filename = f"images/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
 
         plt.savefig(filename)
     if(afficherVisuel):
@@ -67,27 +67,29 @@ def sauvegarder(tab,i,n):
 
     if(sauvegarderImage):
         if(pourcentage):
-            filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
+            filename = f"video/pourcentage/ecart = {ecart}/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
         else:
-            filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
+            filename = f"video/valeur/ecart = {ecart}/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
 
         plt.savefig(filename)
     plt.close()
 
 
 
-def creer_video(n,num):
+def creer_video(n,num,tableau):
     if sauvegarderImage:
         if pourcentage:
-            chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
+            chemin = f"video/pourcentage/ecart = {ecart}/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
         else:
-            chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
+            chemin = f"video/valeur/ecart = {ecart}/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
         
         images = [f"{chemin}{i}.png" for i in range(num)]
         frame = cv2.imread(images[0])
         height, width = frame.shape[:2]
 
-        video_name = f"{chemin}video.mp4"
+        final = calcul_total(tableau)
+        initial = calcul_total(tableau_milieu_aquatique)
+        video_name = f"{chemin}initial = {initial} final = {final}.mp4"
         video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), num/10, (width, height))
 
         for image in images:
@@ -139,5 +141,5 @@ def calcul_total(tab):
         total = sum(sum(row) for row in tab)
     afficher(tab)
     print("total : " + str(total))
-
+    return total
 

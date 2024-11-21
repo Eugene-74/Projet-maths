@@ -21,14 +21,14 @@ def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcu
         j-=1
     
         tableau_milieu_aquatique = effectuer_calcul(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant)
-    creer_video(n,num-1)
+    creer_video(n,num-1,tableau_milieu_aquatique)
     return tableau_milieu_aquatique
 
 
 if(pourcentage):
-    os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
+    os.makedirs(f"video/pourcentage/ecart = {ecart}/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
 else:
-    os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
+    os.makedirs(f"video/valeur/ecart = {ecart}/D={D} ux={u_x} uy={u_y} taille={taille} deltaT={delta_t} deltaX={delta_x} deltaY={delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
 
 
 def initialisation_tableau_calcul_x():
