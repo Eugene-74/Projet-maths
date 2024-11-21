@@ -13,7 +13,6 @@ def effectuer_calcul(tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,
 def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcul_y,tableau_constant):
     j=0
     num = 0
-    ecart = 10
     for i in range(n):
         if(j==0):
             sauvegarder(tableau_milieu_aquatique,num,n)
@@ -27,9 +26,9 @@ def lancer_les_calculs(n,tableau_milieu_aquatique,tableau_calcul_x,tableau_calcu
 
 
 if(pourcentage):
-    os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
+    os.makedirs(f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
 else:
-    os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
+    os.makedirs(f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/", exist_ok=True)
 
 
 def initialisation_tableau_calcul_x():

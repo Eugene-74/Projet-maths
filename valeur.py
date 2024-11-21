@@ -1,7 +1,7 @@
 # Coefficient de diffusion
-D = 10**-1
+# D = 10**-1
+D = 10**-2
 
-# D = 10**-2
 
 
 # pas de coordonnée
@@ -16,19 +16,19 @@ delta_t=1
 taille=101
 
 
-# Si u est grand le schema n'est pas adapté
-u_x=0 # possitif vers la droite
-u_y=0 # possitif vers le bas #utile seuleuement en 2D
+# Si u est grand le schema n'est pas adapté sauf avec l'utilisation de ubis
+# u_x=0 # possitif vers la droite
+# u_y=0 # possitif vers le bas #utile seuleuement en 2D
 
-# u_x=0.1
-# u_y=0.2
+u_x=0.1
+u_y=0.2
 
 # true : mur Newman
 # false : filtre Dirichlet
-murGauche = False
-murDroite = False
-murHaut = False #utile seuleuement en 2D
-murBas =False #utile seuleuement en 2D
+murGauche = False #utile seuleuement en 2D
+murDroite = False #utile seuleuement en 2D
+murHaut = False
+murBas =False
 
 # Permet d'afficher en % fonction du maximum du tableau
 pourcentage = False
@@ -46,13 +46,15 @@ afficherTableau = False
 afficherVisuel = True
 sauvegarderImage = True
 
+# demander la verification des conditions CFL ou non
 verifierLesConditionCFL = True
 
 # nombre de tour de boucle
-n=1000
+n=10000
 
-# Pour cree une video 
-ubis = True
+# Parametre pour cree une video
+ubis = True # choix entre une approximation de u d'ordre 1 (True) ou 2 (False)
+ecart = 10 # ecart entre la sauvegarde d'une image
 
 
 
@@ -67,6 +69,7 @@ def initialisation_tableau():
 
 
 tableau_milieu_aquatique = initialisation_tableau()
+
 # polution initiale
 tableau_milieu_aquatique[10][5] = 7000000
 tableau_milieu_aquatique[11][5] = 7000000
@@ -77,6 +80,7 @@ tableau_milieu_aquatique[11][6] = 7000000
 
 def initialisation_tableau_constant_1D():
     tableau_constant = initialisation_tableau()
+    # polution constante
     # tableau_constant[0][0] = (D)*((delta_t/delta_x**2)
 
 
@@ -89,7 +93,6 @@ def initialisation_tableau_constant_2D():
         for y in range(0,taille):
             # Double au coin si les 2 mur sont polué
             if(x == 0 ) :
-                # TODO pas finit ... pour y ??? pk cette formule
                 tableau_constant[x][y] +=(D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))*Ghaut
             if(y==0):
                 tableau_constant[x][y] += (D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))*Ggauche

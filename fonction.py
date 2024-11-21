@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.colors as cols
 import matplotlib.pyplot as plt
 from valeur import *
 import os
@@ -32,9 +31,9 @@ def afficherGraphicEtSauvegarder(tab):
 
     if(sauvegarderImage):
         if(pourcentage):
-            filename = f"images/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
+            filename = f"images/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
         else:
-            filename = f"images/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
+            filename = f"images/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}.png"
 
         plt.savefig(filename)
     if(afficherVisuel):
@@ -68,9 +67,9 @@ def sauvegarder(tab,i,n):
 
     if(sauvegarderImage):
         if(pourcentage):
-            filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
+            filename = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
         else:
-            filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
+            filename = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/{i}.png"
 
         plt.savefig(filename)
     plt.close()
@@ -80,9 +79,9 @@ def sauvegarder(tab,i,n):
 def creer_video(n,num):
     if sauvegarderImage:
         if pourcentage:
-            chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
+            chemin = f"video/pourcentage/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
         else:
-            chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
+            chemin = f"video/valeur/D={D} ux={u_x} uy={u_y} taille={taille} deltaT{delta_t} deltaX{delta_x} deltaX{delta_y} mur.g={murGauche}.d={murDroite}.h={murHaut}.b={murBas} n={n}/"
         
         images = [f"{chemin}{i}.png" for i in range(num)]
         frame = cv2.imread(images[0])
@@ -114,11 +113,6 @@ def verification_CFL_1D():
             print("\033[91mcourant trop elever en x\033[0m")
             exit()
 
-        if((2*D)*((delta_t/delta_x**2)) == 1):
-            print("\033[92mpropagation limite en x ou en y\033[0m")
-        if(abs(u_x) == (2*D)*(delta_t/delta_x)):
-            print("\033[92mcourant limite en x\033[0m")
-
 
 def verification_CFL_2D():
     if(verifierLesConditionCFL):
@@ -131,13 +125,6 @@ def verification_CFL_2D():
         if(abs(u_y) > (2*D)*(delta_t/delta_y)):
             print("\033[91mcourant trop elever en y\033[0m")
             exit()
-
-        if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2)) == 1):
-            print("\033[92mpropagation limite en x ou en y\033[0m")
-        if(abs(u_x) == (2*D)*(delta_t/delta_x)):
-            print("\033[92mcourant limite en x\033[0m")
-        if(abs(u_y) == (2*D)*(delta_t/delta_y)):
-            print("\033[92mcourant limite en y\033[0m")
 
 def verification_CFL_2D_ubis():
     if(verifierLesConditionCFL):
