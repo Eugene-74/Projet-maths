@@ -11,7 +11,6 @@ delta_t=1
 # taille de la grille
 taille=101
 
-
 # Si u est grand le schema n'est pas adapté sauf avec l'utilisation de ubis
 u_x=0 # possitif vers la droite
 u_y=0 # possitif vers le bas #utile seuleuement en 2D
@@ -38,12 +37,12 @@ Gdroite = 0
 # afficher ou non les elements durant l'execution
 afficherTableauCalcul = False
 afficherConstant = False
-afficherTableau = True
+afficherTableau = False
 afficherVisuel = True
 sauvegarderImage = True
 
 # demander la verification des conditions CFL ou non
-verifierLesConditionCFL = False
+verifierLesConditionCFL = True
 
 
 # Parametre pour cree une video
@@ -60,20 +59,11 @@ def initialisation_tableau():
             tableau[x].append(0)
     return tableau
 
-
-
 tableau_milieu_aquatique = initialisation_tableau()
 
 # polution initiale
-# tableau_milieu_aquatique[10][5] = 7000000
-# tableau_milieu_aquatique[11][5] = 7000000
-# tableau_milieu_aquatique[10][6] = 7000000
-# tableau_milieu_aquatique[11][6] = 7000000
 
 tableau_milieu_aquatique[50][50] = 1
-
-
-
 
 def initialisation_tableau_constant_1D():
     tableau_constant = initialisation_tableau()
