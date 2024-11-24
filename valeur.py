@@ -28,12 +28,6 @@ n=1000
 # Permet d'afficher en % fonction du maximum du tableau
 pourcentage = False
 
-# Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
-Ghaut = 0
-Ggauche = 0
-Gbas = 0
-Gdroite = 0
-
 # afficher ou non les elements durant l'execution
 afficherTableauCalcul = False
 afficherConstant = False
@@ -44,6 +38,11 @@ sauvegarderImage = True
 # demander la verification des conditions CFL ou non
 verifierLesConditionCFL = True
 
+# Déffinit la polution dans sur un mur entier / utile seuleuement en 2D
+Ghaut = 0
+Ggauche = 0
+Gbas = 0
+Gdroite = 0
 
 # Parametre pour cree une video
 ubis = False # choix entre une approximation de u d'ordre 1 (True) ou 2 (False)
@@ -64,6 +63,7 @@ tableau_milieu_aquatique = initialisation_tableau()
 # polution initiale
 
 tableau_milieu_aquatique[50][50] = 1
+
 
 def initialisation_tableau_constant_1D():
     tableau_constant = initialisation_tableau()
