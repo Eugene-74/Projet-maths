@@ -130,7 +130,7 @@ def verification_CFL_2D():
 
 def verification_CFL_2D_ubis():
     if(verifierLesConditionCFL):
-        if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2)+delta_t*u_x/(2*delta_x)+delta_t*u_y/(2*delta_y))>1):
+        if((2*D)*((delta_t/delta_x**2)+(delta_t/delta_y**2))+(delta_t*u_x/(2*delta_x)+delta_t*u_y/(2*delta_y))>1):
             print("\033[91mCondition CFL non respecter\033[0m")
             exit()
 
